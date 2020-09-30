@@ -3,33 +3,31 @@ import { connect } from 'react-redux';
 import { todo } from '../redux/TodoAction';
 
 
-const TodoForm = (props) => {
+
+function TodoForm({sendTodo, todos}) {
     const [text, setText] = useState("");
-
-    console.log(props)
-
-    const handleClick = () => {
-        console.log(props)
-    }
+    
+    // const handleClick = (sendTodo) => {
+    //     props.todo()
+    // }
 
     return (
         <div>
             <input value={text} onChange={(e) => setText(e.target.value)}/>
-            <button onClick={handleClick}>Post</button>
-            <div>{}</div>
+            <button onClick={() => sendTodo(text)}>Post</button>
         </div>
     )
 }
 
-const mapStateToProps = () => {
+const mapStateToProps = (state) => {
     return {
-        todos: state.todos
+        todos: state.todos,
     }
 }
 
-const mapDispatchToProps = () => {
+const mapDispatchToProps = (dispatch) => {
     return {
-        sentTodo: () => dispatch(todo())
+        sendTodo: (text) => dispatch(todo(text)),
     }
 }
 
