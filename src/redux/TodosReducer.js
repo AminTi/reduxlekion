@@ -9,7 +9,7 @@ const TodosReducer = (state = initialState, action) => {
         case TODOS:
             return {
                 ...state,
-                todos: action.text,
+                todos: [...state.todos, action.payload],
             }
         default:
             return state
