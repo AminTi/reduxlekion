@@ -1,35 +1,20 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { todo } from '../redux/TodoAction';
 
-
-
-function TodoForm({sendTodo, todos}) {
+function TodoForm() {
     const [text, setText] = useState("");
+    const todos = useSelector(state => state.todos)
+    const dispatch = useDispatch()
     
-    // const handleClick = (sendTodo) => {
-    //     props.todo()
-    // }
+  console.log(todos);
 
     return (
         <div>
             <input value={text} onChange={(e) => setText(e.target.value)}/>
-            <button onClick={() => sendTodo(text)}>Post</button>
+            <button onClick={() => dispatch(todo(text))}>Post</button>
         </div>
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        todos: state.todos,
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        sendTodo: (text) => dispatch(todo(text)),
-    }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(TodoForm)
+export default TodoForm
